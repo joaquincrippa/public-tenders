@@ -2,11 +2,14 @@ import React from 'react';
 import {Navbar as Navb, Nav } from 'react-bootstrap';
 import AdminLinks from './AdminLinks';
 import UserLinks from './UserLinks';
+import { connect } from 'react-redux';
 
-function Navbar() {
+function Navbar(props) {
+  const { auth } = props;
+
   return (
-    <Navb bg="primary" expand="lg">
-      <Navb.Brand href="#tenders">
+    <Navb bg="primary" expand="lg" collapseOnSelect>
+      <Navb.Brand href="/tenders">
         <img src="http://www.montevera.gob.ar/bundles/monteveraweb/img/LOGO.jpg" className="d-inline-block align-top" alt=""/>
       </Navb.Brand>
       <Navb.Text>
@@ -15,11 +18,17 @@ function Navbar() {
       <Navb.Toggle aria-controls="basic-navbar-nav" />
       <Navb.Collapse>
         <Nav className="mr-auto"></Nav>
-        <AdminLinks/>
         <UserLinks/>
+        {auth.uid ? <AdminLinks/> : null}
       </Navb.Collapse>
   </Navb>
   )
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+  return{
+    auth: state.firebase.auth
+  }
+}
+
+export default connect(mapStateToProps)(Navbar)

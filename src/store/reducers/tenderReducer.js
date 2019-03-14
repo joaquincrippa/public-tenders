@@ -26,7 +26,7 @@ const tenderReducer = (state = initState, action) => {
     case 'LIST_TENDERS_SUCCESS':
       return {
           ...state,
-          entities: state.activePage === 0 ? action.payload.docs : state.entities.concat(action.payload.docs),
+          entities: action.firstPage ? action.payload.docs : state.entities.concat(action.payload.docs),
           isLoading: false,
           errorMessage: null,
           lastPage: action.payload.docs.length < state.itemsPerPage

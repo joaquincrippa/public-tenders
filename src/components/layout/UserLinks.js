@@ -1,13 +1,22 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function UserLinks() {
+function UserLinks(props) {
+  const { auth } = props;
   return (
     <Nav>
-        <Nav.Link href="/tenders">Licitaciones</Nav.Link>
-        <Nav.Link href="#link">Ingresar</Nav.Link>
+        <NavLink className="nav-link" to="/tenders">Licitaciones</NavLink>
+        { !auth.uid ? <NavLink className="nav-link" to="/signin">Ingresar</NavLink> : null }
     </Nav>
   )
 }
 
-export default UserLinks
+const mapStateToProps = (state) => {
+  return{
+    auth: state.firebase.auth
+  }
+}
+
+export default connect(mapStateToProps)(UserLinks)
