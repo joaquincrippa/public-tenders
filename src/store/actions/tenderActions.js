@@ -3,11 +3,7 @@ export const createTender = (tender) => {
       const firestore = getFirestore();
 
       firestore.collection('tenders').add({
-        ...tender,
-        authorFirstName: profile.firstName,
-        authorLastName: profile.lastName,
-        authorId: authorId,
-        createdAt: new Date()
+        ...tender
       }).then(() => {
         dispatch({ type: 'CREATE_TENDER_SUCCESS' });
       }).catch(err => {
@@ -16,19 +12,21 @@ export const createTender = (tender) => {
     }
   };
 
-export const getTenders = () => {
+export const getTenders = (lastElement, limit) => {
     return (dispatch, getState, {getFirestore}) => {
-        const state = getState();
         const firestore = getFirestore();
-        firestore.collection('tenders')
-        .startAt(state.activePage * state.itemsPerPage)
-        .limit(state.itemsPerPage)
+        firestore.collection('tenders').orderBy('time')
+        .startAfter(lastElement)
+        .limit(limit)
         .get()
         .then( querySnapshot => {
-            dispatch({type: 'LIST_TENDERS_SUCESS', payload: querySnapshot});
+            dispatch({type: 'LIST_TENDERS_SUCCESS', payload: querySnapshot});
             })
         .catch(error => {
         dispatch({type: 'LIST_TENDERS_ERROR', error});
         });
+
+        dispatch({type: 'LIST_TENDERS_REQUEST'});
+
     }
   }

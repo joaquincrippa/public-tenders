@@ -13,7 +13,7 @@ var config = {
     messagingSenderId: "201471514925"
 };
 firebase.initializeApp(config);
-firebase.firestore().settings({ timestampsInSnapshots: true });
+firebase.firestore().settings({});
 
 const storage = firebase.storage();
 

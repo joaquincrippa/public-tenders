@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.scss';
 import Navbar from './components/layout/Navbar';
+import ListTenders from './components/tenders/ListTenders';
 
 class App extends Component {
   render() {
@@ -9,8 +10,11 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar/>
-          <Switch className="container">
-          </Switch>
+          <div className="container-fluid">
+            <Switch>
+              <Route exact path="/tenders" component={ListTenders}/>
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>
     );
