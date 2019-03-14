@@ -1,13 +1,22 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../store/actions/authActions';
 
-function AdminLinks() {
+function AdminLinks(props) {
   return (
     <Nav>
-        <Nav.Link href="#create">Nueva licitación</Nav.Link>
-        <Nav.Link href="#create">Salir</Nav.Link>
+        <NavLink className="nav-link" to="/create">Nueva licitación</NavLink>
+        <Nav.Link href="#" onClick={props.signOut}>Salir</Nav.Link>
     </Nav>
   )
 }
 
-export default AdminLinks
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => {dispatch(signOut()); return;}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AdminLinks)

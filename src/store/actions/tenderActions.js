@@ -20,7 +20,7 @@ export const getTenders = (lastElement, limit) => {
         .limit(limit)
         .get()
         .then( querySnapshot => {
-            dispatch({type: 'LIST_TENDERS_SUCCESS', payload: querySnapshot});
+            dispatch({type: 'LIST_TENDERS_SUCCESS', payload: querySnapshot, firstPage: !lastElement});
             })
         .catch(error => {
         dispatch({type: 'LIST_TENDERS_ERROR', error});
