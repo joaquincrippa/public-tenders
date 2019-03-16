@@ -2,6 +2,7 @@ const initState = {
     isSaving: false,
     isLoading: true,
     entities: [],
+    entity: null,
     itemsPerPage: 20,
     errorMessage: null,
     lastPage: false,
@@ -56,6 +57,31 @@ const tenderReducer = (state = initState, action) => {
           ...state,
           errorMessage: action.error
       }
+    
+    case 'GET_TENDER_REQUEST':
+      return {
+        ...state,
+        entity: null,
+        errorMessage: null,
+        isLoading: true
+      }
+
+    case 'GET_TENDER_SUCCESS':
+      return {
+        ...state,
+        entity: action.doc,
+        errorMessage: null,
+        isLoading: false
+      }
+    
+    case 'GET_TENDER_ERROR':
+      return {
+        ...state,
+        entity: null,
+        errorMessage: action.error,
+        isLoading: false
+      }
+
 
     default:
       return state;

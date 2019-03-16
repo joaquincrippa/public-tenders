@@ -66,13 +66,13 @@ export class ListTenders extends Component {
                 <tbody>
                     {
                         tenders && tenders.map( (tender) => 
-                            (<tr key={tender.id}>
-                                <td className="text-center">{moment(tender.data().time.toDate()).format("DD/MM/YYYY")}</td>
-                                <td className="d-none d-md-table-cell text-center">{tender.data().type}</td>
-                                <td className="text-center">{tender.data().number}</td>
-                                <td>{tender.data().object}</td>
-                                <td className="d-none d-md-table-cell text-center">{tender.data().expedient}</td>
-                                <td className="d-none d-md-table-cell text-center">{tender.data().classification}</td>
+                            (<tr key={tender.id}style={{cursor: 'pointer'}}>
+                                <td className="text-center" onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{moment(tender.data().time.toDate()).format("DD/MM/YYYY")}</td>
+                                <td className="d-none d-md-table-cell text-center" onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{tender.data().type}</td>
+                                <td className="text-center" onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{tender.data().number}</td>
+                                <td onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{tender.data().object}</td>
+                                <td className="d-none d-md-table-cell text-center" onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{tender.data().expedient}</td>
+                                <td className="d-none d-md-table-cell text-center" onClick={() => this.props.history.push(`/tenders/${tender.id}`)} >{tender.data().classification}</td>
                                 <td className="d-none d-md-table-cell text-center">
                                     { tender.data().folderUrl ?
                                         <a className="btn" href={tender.data().folderUrl} target="_blank" rel="noopener noreferrer">
