@@ -4,6 +4,7 @@ import './App.scss';
 import Navbar from './components/layout/Navbar';
 import ListTenders from './components/tenders/ListTenders';
 import SignIn from './components/auth/SignIn';
+import CreateTender from './components/tenders/CreateTender';
 
 class App extends Component {
   render() {
@@ -14,7 +15,8 @@ class App extends Component {
           <div className="container-fluid">
             <Switch>
               <Route exact path="/tenders" component={ListTenders}/>
-              <Route path='/signin' component={SignIn} />
+              <Route path="/signin" component={SignIn}/>
+              <Route path="/create" component={CreateTender}/>
             </Switch>
           </div>
         </div>
