@@ -73,7 +73,13 @@ export class ListTenders extends Component {
                                 <td>{tender.data().object}</td>
                                 <td className="d-none d-md-table-cell text-center">{tender.data().expedient}</td>
                                 <td className="d-none d-md-table-cell text-center">{tender.data().classification}</td>
-                                <td className="d-none d-md-table-cell text-center"><button className="btn"><i className="fa fa-file-pdf-o"></i></button></td>
+                                <td className="d-none d-md-table-cell text-center">
+                                    { tender.data().folderUrl ?
+                                        <a className="btn" href={tender.data().folderUrl} target="_blank" rel="noopener noreferrer">
+                                            <i className="fa fa-file-pdf-o"></i>
+                                        </a>
+                                    : null }
+                                </td>
                             </tr>)
                         )
                     }
