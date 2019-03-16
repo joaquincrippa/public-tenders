@@ -57,3 +57,13 @@ export const getTenders = (lastElement, limit) => {
 
     }
   }
+
+  export const getTender = (id) => {
+    return (dispatch, getState, {getFirestore}) => {
+      const firestore = getFirestore();
+      firestore.collection('tenders').doc(id).get()
+        .then( doc => dispatch( {type: 'GET_TENDER_SUCCESS', doc: doc.data()} ) )
+        .catch( error => dispatch( {type: 'GET_TENDER_ERROR', error} ) );
+      dispatch( {type: 'GET_TENDER_REQUEST'} );
+    }
+  }
