@@ -1,26 +1,45 @@
 const initState = {
+    isSaving: false,
     isLoading: true,
     entities: [],
-    itemsPerPage: 5,
+    itemsPerPage: 20,
     errorMessage: null,
-    lastPage: false
+    lastPage: false,
+    createSuccess: false
 }
 
 const tenderReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'CREATE_TENDER_REQUEST':
+      return {
+        ...state,
+        isSaving: true
+      };
 
     case 'CREATE_TENDER_SUCCESS':
       console.log('create tender success');
-      return state;
+      return {
+        ...state,
+        isSaving: false,
+        createSuccess: true,
+        errorMessage: null
+      };
 
     case 'CREATE_TENDER_ERROR':
       console.log('create tender error');
-      return state;
+      return {
+        ...state,
+        isSaving: false,
+        createSuccess: false,
+        errorMessage: action.error
+      }
 
     case 'LIST_TENDERS_REQUEST': 
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        createSuccess: false
+
       };
 
     case 'LIST_TENDERS_SUCCESS':
