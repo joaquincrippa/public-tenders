@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import { getTenders } from '../../store/actions/tenderActions';
 import moment from 'moment';
+import FilterTenders from './FilterTenders';
 
 export class ListTenders extends Component {
     
@@ -36,7 +37,7 @@ export class ListTenders extends Component {
     };
 
     getEntities = (lastElement) => {
-        this.props.getTenders(lastElement, this.props.itemsPerPage);
+        this.props.getTenders(lastElement, this.props.itemsPerPage, this.props.criteria);
     };
     
     render() {
@@ -49,6 +50,7 @@ export class ListTenders extends Component {
             <h1>
                 Licitaciones
             </h1>
+            <FilterTenders/>
             <br/>
             {tenders.length > 0 ? 
             (<Table striped bordered hover responsive="md">
@@ -107,7 +109,8 @@ const mapStateToProps = ( {tender} ) => ({
     lastPage: tender.lastPage,
     entity: tender.entity,
     errorMessage: tender.errorMessage,
-    isLoading: tender.isLoading
+    isLoading: tender.isLoading,
+    criteria: tender.searchCriteria
   });
   
   const mapDispatchToProps = {

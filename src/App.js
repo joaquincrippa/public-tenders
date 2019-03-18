@@ -16,6 +16,7 @@ class App extends Component {
           <div className="container-fluid">
             <Switch>
               <Route exact path="/tenders" component={ListTenders}/>
+              <Route exact path="/" component={ListTenders}/>
               <Route path="/signin" component={SignIn}/>
               <Route path="/create" component={CreateTender}/>
               <Route path="/tenders/:id" component={ViewTender}/>

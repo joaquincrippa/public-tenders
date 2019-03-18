@@ -39,17 +39,24 @@ export const createTender = (tender) => {
     }
   };
 
-export const getTenders = (lastElement, limit) => {
+export const getTenders = (lastElement, limit, criteria) => {
     return (dispatch, getState, {getFirestore}) => {
+        const { type, number, timeAfter, timeBefore, classification } = criteria;
         const firestore = getFirestore();
-        firestore.collection('tenders').orderBy('time')
-        .startAfter(lastElement)
-        .limit(limit)
-        .get()
-        .then( querySnapshot => {
-            dispatch({type: 'LIST_TENDERS_SUCCESS', payload: querySnapshot, firstPage: !lastElement});
+        var query = firestore.collection('tenders');
+        if (type) query = query.where('type', '==', type);
+        if (classification) query = query.where('classification', '==', classification);
+        if (number) query = query.where('number', '==', number);
+        if (timeAfter) query = query.where('time', '>=', timeAfter);
+        if (timeBefore) query = query.where('time', '<=', timeBefore);
+        query = query.orderBy('time');
+        if(lastElement) query =  query.startAfter(lastElement);      
+        query.limit(limit).get().then( querySnapshot => {
+            dispatch({type: 'LIST_TENDERS_SUCCESS', payload: querySnapshot, firstPage: !lastElement,
+              criteria: criteria });
             })
         .catch(error => {
+          console.log(error);
         dispatch({type: 'LIST_TENDERS_ERROR', error});
         });
 

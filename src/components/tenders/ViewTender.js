@@ -9,14 +9,13 @@ export class ViewTender extends Component {
   
   componentDidMount() {
     const id = this.props.match.params.id;
-    console.log(id);
     this.props.getTender(id);
   }
 
   render() {
     const { isLoading, entity } = this.props;
     return (
-      <div class="container-fluid">
+      <div className="container-fluid">
         { isLoading ?
             <SkeletonTheme color="#E2DEDE" >
                 <p>
@@ -59,7 +58,7 @@ export class ViewTender extends Component {
                 <div className="form-group">
                     <h5 htmlFor="folder">Pliego</h5>
                     { entity.folderUrl ? 
-                        <a class="btn btn-link" style={{color: "black"}} href={entity.folderUrl} target="_blank" rel="noopener noreferrer">Descargar</a> :
+                        <a className="btn btn-link" style={{color: "black"}} href={entity.folderUrl} target="_blank" rel="noopener noreferrer">Descargar</a> :
                         <label id="folder">No ha sido cargado</label>
                     }
                 </div>

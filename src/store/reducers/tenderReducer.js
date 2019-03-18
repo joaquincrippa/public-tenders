@@ -6,7 +6,14 @@ const initState = {
     itemsPerPage: 20,
     errorMessage: null,
     lastPage: false,
-    createSuccess: false
+    createSuccess: false,
+    searchCriteria: {
+      type: null,
+      number: null,
+      timeAfter: null,
+      timeBefore: null,
+      classification: null
+    }
 }
 
 const tenderReducer = (state = initState, action) => {
@@ -49,7 +56,8 @@ const tenderReducer = (state = initState, action) => {
           entities: action.firstPage ? action.payload.docs : state.entities.concat(action.payload.docs),
           isLoading: false,
           errorMessage: null,
-          lastPage: action.payload.docs.length < state.itemsPerPage
+          lastPage: action.payload.docs.length < state.itemsPerPage,
+          searchCriteria: action.criteria
       }
 
     case 'LIST_TENDERS_ERROR':

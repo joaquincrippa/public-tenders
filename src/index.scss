@@ -2,3 +2,7 @@ $body-bg: #f1f1f1;
 $primary: #abd22b;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.input-group.mb-2 {
+    margin-bottom: 0 !important;
+}
